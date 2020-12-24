@@ -19,7 +19,7 @@ app.post("/", async (req, res) => {
   if (!apiKey || !transaction || apiKey != process.env.API_KEY) res.json({ error: true, signature: null })
   else {
     typeof transaction == 'string' ? transaction = JSON.parse(transaction) : transaction
-    if (accpetedOperations.includes(transaction.operations[0][0]) && transaction.operations.length == 1){
+    if (acceptedOperations.includes(transaction.operations[0][0]) && transaction.operations.length == 1){
       let signedTransaction = await client.broadcast.sign(transaction, dhive.PrivateKey.from(process.env.PRIVATE_KEY));
       res.json({ error: false, signature: signedTransaction.signatures[0] })
     } else {
