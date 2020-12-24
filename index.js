@@ -16,12 +16,14 @@ app.use(bodyParser.json()); // for parsing application/json
 
 app.post("/", (req, res) => {
   let { apiKey, transaction } = req.body
-  if (!apiKey || !transaction || apiKey != process.env.API_KEY) res.json({ error: true })
+  if (!apiKey || !transaction || apiKey != process.env.API_KEY) res.json({ error: true, signature: null })
   else {
     typeof transaction == 'string' ? transaction = JSON.parse(transaction) : transaction
-    if (accpetedOperations.includes(transaction.operations[0][0])){
+    if (accpetedOperations.includes(transaction.operations[0][0]) && transaction.operations.length == 1){
       let signedTransaction = await client.broadcast.sign(rawTransaction, dhive.PrivateKey.from(process.env.PRIVATE_KEY));
-      res.json({ error: false, signatture: signedTransaction.signatures[0] })
+      res.json({ error: false, signature: signedTransaction.signatures[0] })
+    } else {
+      res.json({ error: true, signature: null })
     }
   }
 })
