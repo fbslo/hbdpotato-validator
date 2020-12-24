@@ -1,6 +1,6 @@
 This is multi-signature validator for HBD potato project.
 
-It creates an API that accept raw transaction and will return signature if it matched required conditions.
+It creates an API that accept raw transaction and will return signature if it matched required conditions (operation is `convert`, `limit_order_cancel`, `limit_order_create`, `limit_order_create2` and transaction includes only 1 one operation).
 
 ---
 
