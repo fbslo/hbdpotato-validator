@@ -4,16 +4,27 @@ It creates an API that accept raw transaction and will return signature if it ma
 
 ---
 
-Method: `POST`
-Endpoint: `/`
+*How to use?*
 
-Required body:
+Requirement: NodeJS & NPM.
+
+Rename `.env.example` to `.env`, add config details.
+
+Run `npm i && node index.js`
+
+---
+
+*Method:* `POST`
+
+*Endpoint:* `/`
+
+*Required body:*
 
 `apiKey`: predetermined API key for authentication.
 
 `transaction`: raw transaction (string)
 
-Response:
+*Response:*
 
 ```
 {
@@ -24,4 +35,4 @@ Response:
 
 ---
 
-Created by @fbslo
+Created with :heart: by @fbslo
