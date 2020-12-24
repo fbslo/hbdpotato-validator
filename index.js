@@ -26,12 +26,14 @@ app.post("/", async (req, res) => {
       typeof transaction == 'string' ? transaction = JSON.parse(transaction) : transaction
       if (acceptedOperations.includes(transaction.operations[0][0]) && transaction.operations.length == 1){
         let signedTransaction = await client.broadcast.sign(transaction, dhive.PrivateKey.from(process.env.PRIVATE_KEY));
+        console.log('Returning signature')
         res.json({ error: false, signature: signedTransaction.signatures[0] })
       } else {
         res.json({ error: true, signature: null })
       }
     }
   } catch (e) {
+    console.log(e)
     res.json({
       error: true,
       signature: false
