@@ -14,6 +14,10 @@ app.disable('x-powered-by');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json()); // for parsing application/json
 
+app.get('/', (req, res) => {
+  res.send("Hello There")
+})
+
 app.post("/", async (req, res) => {
   let { apiKey, transaction } = req.body
   if (!apiKey || !transaction || apiKey != process.env.API_KEY) res.json({ error: true, signature: null })
